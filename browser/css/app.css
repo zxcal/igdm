@@ -392,10 +392,10 @@ button, button:focus {
 
 @media (max-width:768px) {
   .chat-list {
-    width: 4.5rem;
+    width: calc(5rem + 6px);
   }
   .chat {
-    max-width: calc(100% - 4.5rem);
+    max-width: calc(100% - 5rem - 6px);
   }
 }
 
