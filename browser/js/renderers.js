@@ -13,20 +13,17 @@ function renderMessage (message, direction, time, type) {
   var divContent = dom('<div class="content"></div>');
 
   if (direction === 'inward') {
-    var senderUsername = window.chat.accounts.find((account) => {
+    var senderUserPicture = window.chat.accounts.find((account) => {
       return account.id == message._params.accountId
-    })._params.username;
-    divContent.appendChild(dom(`<p class="message-sender">${senderUsername}</p>`));
+    })._params.picture;
+    div.appendChild(dom(`<img class="user-pic" src="${senderUserPicture}">`));
   }
 
   if (!type && typeof message === 'string') type = 'text';
 
   if (renderers[type]) renderers[type](divContent, message);
   else renderMessageAsText(divContent, '<unsupported message format>', true);
-
-  divContent.appendChild(dom(
-    `<p class="message-time">${time ? formatTime(time) : 'Sending...'}</p>`)
-  );
+  
   div.appendChild(divContent);
   
   return div
@@ -160,11 +157,10 @@ function renderContextMenu (text) {
   menu.popup({});
 }
 
-function renderChatListItem (username, msgPreview, thumbnail, id) {
+function renderChatListItem (username, msgPreview, thumbnail, id, isRead) {
   var li = document.createElement('li');
-  li.classList.add('col-12', 'p-3');
-  li.appendChild(dom(`<div><img class="thumb" src="${thumbnail}"></div>`));
-  li.appendChild(dom(`<div class="username ml-3 d-none d-sm-inline-block"><b>${username}</b><br>${msgPreview}</div>`));
+  li.appendChild(dom(`<div class="thumb-container"><img class="thumb" src="${thumbnail}"><div>`));
+  li.appendChild(dom(`<div class="item-right"><div class="username">${username}</div><div class="msgPreview${isRead ? ' msgRead' : ''}">${msgPreview}</div></div>`));
   if (id) li.setAttribute("id", `chatlist-${id}`);
 
   return li;
@@ -198,7 +194,8 @@ function renderChatList (chatList) {
     if (chat_.accounts[0]) {
       thumbnail = chat_.accounts[0]._params.picture;
     }
-    var li = renderChatListItem(usernames, msgPreview, thumbnail, chat_.id);
+
+    var li = renderChatListItem(usernames, msgPreview, thumbnail, chat_.id, isRead(chat_));
 
     registerChatUser(chat_);
     if (isActive(chat_)) setActive(li);
@@ -222,13 +219,13 @@ function renderChatList (chatList) {
 
 function renderChatHeader (chat_) {
   let usernames = getUsernames(chat_);
-  let b = dom(`<b>${usernames}</b>`);
+  let b = dom(`<div class="chat-name">${usernames}</div>`);
 
   if (chat_.accounts.length === 1) {
     // open user profile in browser
     b.onclick = () => openInBrowser(`https://instagram.com/${usernames}`)
   }
-  let chatTitleContainer = document.querySelector('.chat-title');
+  let chatTitleContainer = document.querySelector('.title-left');
   chatTitleContainer.innerHTML = '';
   chatTitleContainer.appendChild(b);
 }

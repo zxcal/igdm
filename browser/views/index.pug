@@ -6,36 +6,35 @@ append head
 block body
   body(no-js='', on-click-remove-class='.dropdown active')
     .container_fluid.app
-      .header.d-flex.p-3
-        button.col-md-auto.settings(no-js='', on-mouseenter-add-class='.dropdown-menu active')
-        .dropdown-menu(no-js='', on-mouseleave-remove-class='.dropdown-menu active')
-          #seen-flagger.dropdown-item(title="You'd know when recipients read your message, but they won't know when you read theirs")
-            | Don't send 'Seen' receipts
-          #notifier-settings.dropdown-item
-            | Disable Notifications
-          #unfollowers.dropdown-item Users not following back
-          #logout.dropdown-item Log out
-        .search-header.col-md-auto
-          input.form-control(type='text', name='search', placeholder='Search Instagram users')
       .appBody
-        .chat-list.col-4
-          .listStrapper.row
+        .chat-list
+          .header.d-flex
+            img.settings(src='img/settings.svg', no-js='', on-mouseenter-add-class='.dropdown-menu active')
+            .dropdown-menu(no-js='', on-mouseleave-remove-class='.dropdown-menu active')
+              #seen-flagger.dropdown-item(title="You'd know when recipients read your message, but they won't know when you read theirs")
+                | Don't send 'Seen' receipts
+              #notifier-settings.dropdown-item
+                | Disable Notifications
+              #unfollowers.dropdown-item Users not following back
+              #logout.dropdown-item Log out
+            input.form-control(type='text', name='search', placeholder='搜尋')
+            .header-right
+          .listStrapper
             ul
-        .chat.col-8
-          .chat-title.row.p-3
-          .messages.row.p-3.pt-5
+        .chat
+          .chat-title
+            .title-left
+            img.info(src='img/info.svg')
+          .messages
             .center.cover
               img(src='img/icon.png', width='300px')
               p.italic Search and select a chat to start.
-          .messageBox.row.p-3
-            .new-message
-              form
-                textarea(placeholder='Start a message' id="messageText")
-            button.send-attachment
-              img(src='img/attachment.png', width='20px')
+          .messageBox
+            form
+              textarea(id="messageText" rows="1")
+            img.send-attachment(src='img/image.svg', width='24px')
             input.file-input.hide(type='file', accept='image/jpeg,image/jpg')
-            button.open-emoji(no-js='', on-click-toggle-class='.emojis hide')
-              img(src='img/smiley.png', width='20px')
+            img.open-emoji(src='img/emoji.svg', width='24px', no-js='', on-click-toggle-class='.emojis hide')
             .emojis.hide
               .emojis-header
               .emojis-body

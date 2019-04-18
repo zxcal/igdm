@@ -91,6 +91,10 @@ function isActive (chat_) {
   return chat_.id === window.chat.id;
 }
 
+function isRead (chat_) {
+  return chat_._params.itemsSeenAt[window.loggedInUserId].itemId === chat_.items[0].id;
+}
+
 function markAsRead (id, li) {
   let chat_ = unreadChats[id];
   if (chat_) {
@@ -102,6 +106,7 @@ function markAsRead (id, li) {
     delete unreadChats[id];
   }
   li.classList.remove('notification');
+  li.querySelector('.msgPreview').classList.add('msgRead');
 }
 
 function sendMessage (message, accounts, chatId) {

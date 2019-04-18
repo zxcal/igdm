@@ -2,7 +2,7 @@ const electron = require('electron');
 const { Menu, MenuItem } = electron.remote;
 const ipcRenderer = electron.ipcRenderer;
 const DUMMY_CHAT_ID = 'fake id';
-const MSG_INPUT_SELECTOR = '.new-message form textarea';
+const MSG_INPUT_SELECTOR = '.messageBox form textarea';
 const CHAT_WINDOW_SELECTOR = '.chat .messages';
 const URL_REGEX = new RegExp(/(http:\/\/|https:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/, 'i');
 

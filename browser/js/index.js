@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ipcRenderer.on('loggedInUser', (evt, user) => {
     window.loggedInUserId = user.id;
     window.loggedInUser = user;
-    setProfilePic();
+    // setProfilePic();
   });
 
   ipcRenderer.on('chatList', (evt, chats_) => {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     notify('Image upload failed. :( Please ensure your image is in .jpg format.', true);
   })
 
-  document.querySelector('button.open-emoji').onclick = () => {
+  document.querySelector('.open-emoji').onclick = () => {
     const onEmojiSelected = (emoji) => {
       document.querySelector(MSG_INPUT_SELECTOR).value += emoji;
       document.querySelector('.emojis').classList.add('hide');
