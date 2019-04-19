@@ -179,7 +179,7 @@ button, button:focus {
   margin-bottom: 0.25rem;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .chat .message .user-pic {
